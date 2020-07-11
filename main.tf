@@ -1,4 +1,13 @@
-resource "local_file" "hello_world" {
-    content     = "Hello World!"
-    filename = "helloworld.txt"
+
+terraform {
+  backend "consul" {
+    scheme  = "http"
+    path    = "state"
+    gzip    = false
+  }
+}
+
+resource "local_file" "local_message" {
+  content  = var.message
+  filename = "message.txt"
 }
